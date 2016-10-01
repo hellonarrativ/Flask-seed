@@ -1,13 +1,12 @@
-from flask import Flask, jsonify
-from flask.views import MethodView
+from flask import Flask
 
-app = Flask(__name__)
+from routes import router
 
-class HelloWorldView(MethodView):
-    def get(self):
-        return jsonify(data="Hello, World!")
-
-app.add_url_rule('/', view_func=HelloWorldView.as_view('hello_world'), methods=['GET',])
+def create_app():
+    app = Flask(__name__)
+    app.register_blueprint(router)
+    return app
 
 if __name__ == "__main__":
+    app = create_app()
     app.run(debug=True, host='0.0.0.0')
