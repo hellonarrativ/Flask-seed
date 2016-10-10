@@ -1,9 +1,11 @@
 from flask import Flask
 
+from config import get_current_config
 from routes import router
 
 def create_app():
     app = Flask(__name__)
+    app.config.from_object(get_current_config())
     app.register_blueprint(router)
     return app
 
