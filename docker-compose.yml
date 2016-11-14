@@ -11,6 +11,17 @@ services:
       - ./app:/root/app
     ports:
       - '5000:5000'
+  flake8:
+    image: bamx/flask-seed
+    build: .
+    environment:
+      - LANG=en_US.UTF-8
+      - APP_ENV=local
+      - PYTHONPATH=/root/app
+    volumes:
+      - ./app:/root/app
+    entrypoint: "flake8"
+    command: /root/app
   test:
     image: bamx/flask-seed
     build: .

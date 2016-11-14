@@ -2,6 +2,7 @@ import json
 
 from test import AppTestCase
 
+
 class TestHelloWorld(AppTestCase):
     def test_returns_hello_world(self):
         response = self.request_api_route('get', '/')
