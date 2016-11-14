@@ -6,18 +6,31 @@ from flask import g
 from app import create_app
 from db import init_db, get_db
 
+
 class TestInitDb(unittest.TestCase):
     def test_creates_url_table(self):
         app = create_app()
         with app.app_context():
             db = get_db()
 
-            url_table = db.execute("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='url'").fetchone()
+            url_table = db.execute("""
+                SELECT
+                    count(*)
+                FROM sqlite_master
+                WHERE
+                    type='table' AND name='url'
+            """).fetchone()
             self.assertEqual(url_table[0], 0)
 
             init_db(app)
 
-            url_table = db.execute("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='url'").fetchone()
+            url_table = db.execute("""
+                SELECT
+                    count(*)
+                FROM sqlite_master
+                WHERE
+                    type='table' AND name='url'
+            """).fetchone()
             self.assertEqual(url_table[0], 1)
 
 

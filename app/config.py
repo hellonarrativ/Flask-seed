@@ -17,8 +17,10 @@ CONFIGS = {
     'test': TestConfig,
 }
 
+
 def get_config(env):
     return CONFIGS.get(env)
+
 
 def get_current_config():
     return get_config(os.environ['APP_ENV'])
